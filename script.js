@@ -1,4 +1,8 @@
-// Khai báo các biến DOM
+//Khai báo các biến DOM
+const loginForm = document.getElementById('loginForm');
+const registerForm = document.getElementById('registerForm');
+const authTabs = document.querySelectorAll('.auth-tab');
+const authTabsContainer = document.querySelector('.auth-tabs');
 const guestActions = document.getElementById('guestActions');
 const userProfile = document.getElementById('userProfile');
 const logoutBtn = document.getElementById('logoutBtn');
@@ -7,6 +11,7 @@ const navbar = document.querySelector('.navbar');
 const scrollToTopBtn = document.getElementById('scrollToTopBtn');
 const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
 const navContainer = document.querySelector('.nav-container');
+const navLinks = document.querySelectorAll('.nav-links a');
 
 // Hàm xử lý Preloader
 window.addEventListener('load', () => {
@@ -56,6 +61,14 @@ if (mobileMenuBtn && navContainer) {
         mobileMenuBtn.classList.toggle('active');
     });
 }
+
+// Đóng menu khi click vào link
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        navContainer.classList.remove('active');
+        mobileMenuBtn.classList.remove('active');
+    });
+});
 
 // Xử lý click ngoài menu để đóng
 document.addEventListener('click', (e) => {
@@ -131,32 +144,12 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Quan sát các phần tử cần hiệu ứng
-document.addEventListener('DOMContentLoaded', () => {
-    const cards = document.querySelectorAll('.feature-card, .category-card, .testimonial-card');
-    cards.forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-        observer.observe(card);
-    });
-});
 
-// Thêm class visible khi element trong viewport
 document.addEventListener('DOMContentLoaded', () => {
     const cards = document.querySelectorAll('.feature-card, .category-card, .testimonial-card');
     cards.forEach(card => {
         card.classList.add('animate-on-scroll');
-    });
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, { threshold: 0.1 });
-    
-    cards.forEach(card => {
+
         observer.observe(card);
     });
 });
@@ -219,3 +212,16 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+// Xử lý form newsletter
+const newsletterForm = document.querySelector('.newsletter-form');
+if (newsletterForm) {
+    newsletterForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const emailInput = newsletterForm.querySelector('input[type="email"]');
+        if (emailInput.value) {
+            showNotification('Cảm ơn bạn đã đăng ký nhận tin!', 'success');
+            emailInput.value = '';
+        }
+    });
+}

@@ -239,26 +239,6 @@
     </a>
     
     <script src="script.js"></script>
-    <script>
-    // Hiển thị tên người dùng đăng nhập
-    document.addEventListener('DOMContentLoaded', function() {
-        const userNameSpan = document.getElementById('userNameDisplay');
-        const userName = localStorage.getItem('userName');
-        if (userNameSpan && userName) {
-            userNameSpan.textContent = userName;
-        }
-        
-        // Xử lý menu mobile
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navContainer = document.querySelector('.nav-container');
-        
-        if (mobileMenuBtn && navContainer) {
-            mobileMenuBtn.addEventListener('click', function() {
-                navContainer.classList.toggle('active');
-                mobileMenuBtn.classList.toggle('active');
-            });
-        }
-    });
-    </script>
+    
 </body>
 </html>
