@@ -225,3 +225,20 @@ if (newsletterForm) {
         }
     });
 }
+// ...existing code...
+if (isLoggedIn === 'true') {
+    if (guestActions) guestActions.style.display = 'none';
+    if (userProfile) userProfile.style.display = 'flex';
+    // Hiển thị tên người dùng nếu có
+    const userNameSpan = document.getElementById('userNameDisplay');
+    let userName = localStorage.getItem('userName');
+    if (!userName) {
+        // Nếu chưa có tên, lấy phần trước @ của email
+        const userEmail = localStorage.getItem('userEmail');
+        if (userEmail) userName = userEmail.split('@')[0];
+    }
+    if (userNameSpan && userName) {
+        userNameSpan.textContent = userName;
+    }
+}
+// ...existing code...

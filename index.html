@@ -3,242 +3,208 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WealthWallet - Ứng dụng quản lý tài chính cá nhân giúp bạn theo dõi thu chi, lập kế hoạch tiết kiệm và đạt mục tiêu tài chính.">
+    <meta name="keywords" content="quản lý tài chính, theo dõi thu chi, tiết kiệm, đầu tư, WealthWallet, ví điện tử">
+    <meta name="author" content="WealthWallet">
+    <meta property="og:title" content="WealthWallet - Quản lý tài chính thông minh">
+    <meta property="og:description" content="WealthWallet giúp bạn theo dõi thu chi, lập kế hoạch tiết kiệm và đạt được mục tiêu tài chính cá nhân.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80">
+    
     <title>WealthWallet - Quản lý tài chính cá nhân</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Preconnect to external domains for performance -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://images.unsplash.com">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="style.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💳</text></svg>">
 </head>
 <body>
     <div id="preloader">
         <div class="preloader-content">
-            <div class="preloader-spinner">
-                <div class="preloader-icon">
-                    <i class="fas fa-wallet"></i>
-                </div>
-                <div class="preloader-progress"></div>
-            </div>
+            <div class="preloader-spinner"></div>
             <p>Đang tải WealthWallet...</p>
         </div>
     </div>
 
-    <div class="banner">
-        <div class="navbar">
-            <a href="index.html" class="logo">
-                <div class="logo-icon">
-                    <i class="fas fa-wallet"></i>
-                </div>
-                <span>WealthWallet</span>
-            </a>
-            <div class="nav-container">
-                <ul class="nav-links">
-                    <li><a href="#"><i class="fas fa-home"></i> Trang chủ</a></li>
-                    <li><a href="#"><i class="fas fa-chart-pie"></i> Tổng quan</a></li>
-                    <li><a href="#"><i class="fas fa-money-bill-wave"></i> Thu chi</a></li>
-                    <li><a href="#"><i class="fas fa-piggy-bank"></i> Tiết kiệm</a></li>
-                </ul>
-                <div class="user-section">
+    <header class="header">
+        <div class="banner">
+            <nav class="navbar">
+                <a href="index.html" class="logo" aria-label="WealthWallet - Trang chủ">
+                    <div class="logo-icon">
+                        <i class="fas fa-wallet" aria-hidden="true"></i>
+                    </div>
+                    <span>WealthWallet</span>
+                </a>
+                
+                <button class="mobile-menu-btn" aria-label="Mở menu" aria-expanded="false">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+                
+                <div class="nav-container">
+                    <ul class="nav-links">
+                        <li><a href="#"><i class="fas fa-home" aria-hidden="true"></i> Trang chủ</a></li>
+                        <li><a href="#"><i class="fas fa-chart-pie" aria-hidden="true"></i> Tổng quan</a></li>
+                        <li><a href="#"><i class="fas fa-money-bill-wave" aria-hidden="true"></i> Thu chi</a></li>
+                        <li><a href="#"><i class="fas fa-piggy-bank" aria-hidden="true"></i> Tiết kiệm</a></li>
+                    </ul>
                     <div class="user-actions" id="guestActions">
                         <a href="auth.html?tab=login" class="user-btn login-btn">Đăng nhập</a>
                         <a href="auth.html?tab=register" class="user-btn register-btn">Đăng ký</a>
                     </div>
                     <div class="user-profile" id="userProfile" style="display: none;">
-                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=464&q=80" alt="User Avatar" class="user-avatar" loading="lazy">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=464&q=80" alt="Avatar của Nguyễn Văn A" class="user-avatar" loading="lazy" width="40" height="40">
                         <span id="userNameDisplay">Nguyễn Văn A</span>
                         <div class="user-dropdown">
-                            <a href="#"><i class="fas fa-user"></i> Hồ sơ</a>
-                            <a href="#"><i class="fas fa-cog"></i> Cài đặt</a>
-                            <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+                            <a href="#"><i class="fas fa-user" aria-hidden="true"></i> Hồ sơ</a>
+                            <a href="#"><i class="fas fa-cog" aria-hidden="true"></i> Cài đặt</a>
+                            <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt" aria-hidden="true"></i> Đăng xuất</a>
                         </div>
                     </div>
                 </div>
+            </nav>
+            
+            <div class="content">
+                <h1>Quản lý tài chính <span class="highlight">thông minh</span></h1>
+                <p>WealthWallet giúp bạn theo dõi thu chi, lập kế hoạch tiết kiệm và đạt được mục tiêu tài chính cá nhân. Kiểm soát tài chính, làm chủ tương lai.</p>
+                <div class="button-group">
+                    <a href="auth.html?tab=register" class="btn btn-primary"><i class="fas fa-chart-line" aria-hidden="true"></i> Bắt đầu ngay</a>
+                    <a href="#features" class="btn btn-secondary"><i class="fas fa-book" aria-hidden="true"></i> Tìm hiểu thêm</a>
+                </div>
             </div>
-            <div class="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
+            
+            <div class="scroll-indicator">
+                <span>Cuộn xuống</span>
+                <i class="fas fa-chevron-down" aria-hidden="true"></i>
             </div>
         </div>
-        <div class="content">
-            <h1>Quản lý tài chính <span class="highlight">thông minh</span></h1>
-            <p>WealthWallet giúp bạn theo dõi thu chi, lập kế hoạch tiết kiệm và đạt được mục tiêu tài chính cá nhân. Kiểm soát tài chính, làm chủ tương lai.</p>
-            <div class="button-group">
-                <a href="auth.html?tab=register" class="btn btn-primary"><i class="fas fa-chart-line"></i> Bắt đầu ngay</a>
-                <a href="#features" class="btn btn-secondary"><i class="fas fa-book"></i> Tìm hiểu thêm</a>
-            </div>
-        </div>
-        <div class="scroll-indicator">
-            <span>Cuộn xuống</span>
-            <i class="fas fa-chevron-down"></i>
-        </div>
-    </div>
+    </header>
 
-    <section id="features" class="features">
-        <div class="container">
-            <h2 class="section-title">Tính năng nổi bật</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-chart-pie"></i>
-                    </div>
-                    <h3>Theo dõi thu chi</h3>
-                    <p>Phân loại và phân tích chi tiêu theo danh mục, giúp bạn hiểu rõ dòng tiền</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-bullseye"></i>
-                    </div>
-                    <h3>Mục tiêu tài chính</h3>
-                    <p>Thiết lập và theo dõi tiến độ đạt được các mục tiêu tài chính cá nhân</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-piggy-bank"></i>
-                    </div>
-                    <h3>Kế hoạch tiết kiệm</h3>
-                    <p>Tạo kế hoạch tiết kiệm thông minh với các công cụ phân tích và dự báo</p>
+    <main>
+        <section id="features" class="features">
+            <div class="container">
+                <h2 class="section-title">Tính năng nổi bật</h2>
+                <div class="features-grid">
+                    <article class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-chart-pie" aria-hidden="true"></i></div>
+                        <h3>Theo dõi thu chi</h3>
+                        <p>Phân loại và phân tích chi tiêu theo danh mục, giúp bạn hiểu rõ dòng tiền</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-bullseye" aria-hidden="true"></i></div>
+                        <h3>Mục tiêu tài chính</h3>
+                        <p>Thiết lập và theo dõi tiến độ đạt được các mục tiêu tài chính cá nhân</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-piggy-bank" aria-hidden="true"></i></div>
+                        <h3>Kế hoạch tiết kiệm</h3>
+                        <p>Tạo kế hoạch tiết kiệm thông minh với các công cụ phân tích và dự báo</p>
+                    </article>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="style-categories">
-        <div class="container">
-            <h2 class="section-title">Danh mục quản lý</h2>
-            <div class="categories-grid">
-                <div class="category-card">
-                    <div class="category-img-container">
-                        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1611&q=80" alt="Quản lý thu nhập" class="category-img" loading="lazy">
-                        <div class="category-overlay"></div>
-                    </div>
-                    <div class="category-content">
-                        <h3>Thu nhập</h3>
-                        <p>Theo dõi và quản lý các nguồn thu nhập của bạn</p>
-                        <a href="#" class="category-link">Xem thêm <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <div class="category-card">
-                    <div class="category-img-container">
-                        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Quản lý chi tiêu" class="category-img" loading="lazy">
-                        <div class="category-overlay"></div>
-                    </div>
-                    <div class="category-content">
-                        <h3>Chi tiêu</h3>
-                        <p>Phân loại và phân tích chi tiêu hàng tháng</p>
-                        <a href="#" class="category-link">Xem thêm <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <div class="category-card">
-                    <div class="category-img-container">
-                        <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1771&q=80" alt="Tiết kiệm & Đầu tư" class="category-img" loading="lazy">
-                        <div class="category-overlay"></div>
-                    </div>
-                    <div class="category-content">
-                        <h3>Tiết kiệm & Đầu tư</h3>
-                        <p>Theo dõi các khoản tiết kiệm và đầu tư của bạn</p>
-                        <a href="#" class="category-link">Xem thêm <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="testimonials">
-        <div class="container">
-            <h2 class="section-title">Cảm nhận của người dùng</h2>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">
-                        <i class="fas fa-quote-left"></i>
-                    </div>
-                    <p class="testimonial-text">"Nhờ WealthWallet, tôi đã tiết kiệm được 30% thu nhập và trả hết nợ trong vòng 6 tháng. Thật tuyệt vời!"</p>
-                    <div class="testimonial-author">
-                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=776&q=80" alt="Mai Linh" class="author-avatar" loading="lazy">
-                        <div class="author-info">
-                            <h4>Mai Linh</h4>
-                            <p>Kế toán</p>
+        <section class="style-categories">
+            <div class="container">
+                <h2 class="section-title">Danh mục quản lý</h2>
+                <div class="categories-grid">
+                    <article class="category-card">
+                        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Quản lý thu nhập" class="category-img" loading="lazy" width="400" height="300">
+                        <div class="category-content">
+                            <h3>Thu nhập</h3>
+                            <p>Theo dõi và quản lý các nguồn thu nhập của bạn</p>
                         </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">
-                        <i class="fas fa-quote-left"></i>
-                    </div>
-                    <p class="testimonial-text">"Tôi đã mua được nhà sau 3 năm sử dụng WealthWallet. Ứng dụng giúp tôi có kế hoạch tài chính rõ ràng."</p>
-                    <div class="testimonial-author">
-                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Trung Anh" class="author-avatar" loading="lazy">
-                        <div class="author-info">
-                            <h4>Trung Anh</h4>
-                            <p>Kỹ sư phần mềm</p>
+                    </article>
+                    <article class="category-card">
+                        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Quản lý chi tiêu" class="category-img" loading="lazy" width="400" height="300">
+                        <div class="category-content">
+                            <h3>Chi tiêu</h3>
+                            <p>Phân loại và phân tích chi tiêu hàng tháng</p>
                         </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">
-                        <i class="fas fa-quote-left"></i>
-                    </div>
-                    <p class="testimonial-text">"Là sinh viên, tôi luôn gặp khó khăn trong quản lý chi tiêu. WealthWallet giúp tôi kiểm soát tốt tài chính cá nhân."</p>
-                    <div class="testimonial-author">
-                        <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=798&q=80" alt="Minh Tuấn" class="author-avatar" loading="lazy">
-                        <div class="author-info">
-                            <h4>Minh Tuấn</h4>
-                            <p>Sinh viên</p>
+                    </article>
+                    <article class="category-card">
+                        <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Tiết kiệm & Đầu tư" class="category-img" loading="lazy" width="400" height="300">
+                        <div class="category-content">
+                            <h3>Tiết kiệm & Đầu tư</h3>
+                            <p>Theo dõi các khoản tiết kiệm và đầu tư của bạn</p>
                         </div>
-                    </div>
+                    </article>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="cta-section">
-        <div class="container">
-            <div class="cta-content">
-                <h2>Bắt đầu hành trình quản lý tài chính ngay hôm nay</h2>
-                <p>Đăng ký miễn phí và trải nghiệm sự khác biệt</p>
-                <a href="auth.html?tab=register" class="btn btn-primary btn-large">Tạo tài khoản miễn phí</a>
+        <section class="testimonials">
+            <div class="container">
+                <h2 class="section-title">Cảm nhận của người dùng</h2>
+                <div class="testimonials-grid">
+                    <blockquote class="testimonial-card">
+                        <p class="testimonial-text">"Nhờ WealthWallet, tôi đã tiết kiệm được 30% thu nhập và trả hết nợ trong vòng 6 tháng. Thật tuyệt vời!"</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Mai Linh" class="author-avatar" loading="lazy" width="60" height="60">
+                            <div class="author-info">
+                                <h4>Mai Linh</h4>
+                                <p>Kế toán</p>
+                            </div>
+                        </div>
+                    </blockquote>
+                    <blockquote class="testimonial-card">
+                        <p class="testimonial-text">"Tôi đã mua được nhà sau 3 năm sử dụng WealthWallet. Ứng dụng giúp tôi có kế hoạch tài chính rõ ràng."</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Trung Anh" class="author-avatar" loading="lazy" width="60" height="60">
+                            <div class="author-info">
+                                <h4>Trung Anh</h4>
+                                <p>Kỹ sư phần mềm</p>
+                            </div>
+                        </div>
+                    </blockquote>
+                    <blockquote class="testimonial-card">
+                        <p class="testimonial-text">"Là sinh viên, tôi luôn gặp khó khăn trong quản lý chi tiêu. WealthWallet giúp tôi kiểm soát tốt tài chính cá nhân."</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Minh Tuấn" class="author-avatar" loading="lazy" width="60" height="60">
+                            <div class="author-info">
+                                <h4>Minh Tuấn</h4>
+                                <p>Sinh viên</p>
+                            </div>
+                        </div>
+                    </blockquote>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-logo-section">
-                    <div class="footer-logo">WealthWallet</div>
-                    <p>Nền tảng quản lý tài chính cá nhân thông minh</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                        <a href="#"><i class="fab fa-tiktok"></i></a>
-                    </div>
+                <div class="footer-logo">WealthWallet</div>
+                <p>Nền tảng quản lý tài chính cá nhân thông minh</p>
+                <ul class="footer-links">
+                    <li><a href="#">Về chúng tôi</a></li>
+                    <li><a href="#">Tính năng</a></li>
+                    <li><a href="#">Blog tài chính</a></li>
+                    <li><a href="#">Liên hệ</a></li>
+                    <li><a href="#">Hỏi đáp</a></li>
+                </ul>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+                    <a href="#" aria-label="TikTok"><i class="fab fa-tiktok" aria-hidden="true"></i></a>
                 </div>
-                <div class="footer-links-section">
-                    <h3>Liên kết nhanh</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Về chúng tôi</a></li>
-                        <li><a href="#">Tính năng</a></li>
-                        <li><a href="#">Blog tài chính</a></li>
-                        <li><a href="#">Liên hệ</a></li>
-                        <li><a href="#">Hỏi đáp</a></li>
-                    </ul>
+                <div class="copyright">
+                    &copy; 2023 WealthWallet. Tất cả quyền được bảo lưu.
                 </div>
-                <div class="footer-newsletter">
-                    <h3>Đăng ký nhận tin</h3>
-                    <p>Nhận thông báo về các tính năng mới và mẹo tài chính</p>
-                    <form class="newsletter-form">
-                        <input type="email" placeholder="Email của bạn" required>
-                        <button type="submit">Đăng ký</button>
-                    </form>
-                </div>
-            </div>
-            <div class="copyright">
-                &copy; 2023 WealthWallet. Tất cả quyền được bảo lưu.
             </div>
         </div>
     </footer>
     
-    <a href="#" id="scrollToTopBtn" title="Cuộn lên đầu trang">
-        <i class="fas fa-arrow-up"></i>
+    <a href="#" id="scrollToTopBtn" title="Cuộn lên đầu trang" aria-label="Cuộn lên đầu trang">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </a>
     
     <script src="script.js"></script>
-    
 </body>
 </html>

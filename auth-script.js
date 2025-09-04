@@ -1,5 +1,6 @@
 
 const urlParams = new URLSearchParams(window.location.search);
+
 const activeTab = urlParams.get('tab') || 'login';
 
 
@@ -9,31 +10,21 @@ const loginForm = document.getElementById('loginForm');
 const registerForm = document.getElementById('registerForm');
 const authTabsContainer = document.querySelector('.auth-tabs');
 
-// Thiết lập tab active ban đầu
-authTabsContainer.setAttribute('data-active-tab', activeTab);
-
-
-
+// Chuyển tab
 function switchTab(tabName) {
     authTabs.forEach(tab => {
-        if (tab.getAttribute('data-tab') === tabName) {
-            tab.classList.add('active');
-        } else {
-            tab.classList.remove('active');
-        }
+        tab.classList.toggle('active', tab.getAttribute('data-tab') === tabName);
     });
-
     authForms.forEach(form => {
-        if (form.id === `${tabName}Form`) {
-            form.classList.add('active');
-        } else {
-            form.classList.remove('active');
-        }
+        form.classList.toggle('active', form.id === `${tabName}Form`);
     });
     authTabsContainer.setAttribute('data-active-tab', tabName);
 }
-
-switchTab(activeTab);
+// Kiểm tra trạng thái đăng nhập
+const isLoggedIn = localStorage.getItem('isLoggedIn');
+const guestActions = document.getElementById('guestActions');
+const userProfile = document.getElementById('userProfile');
+const logoutBtn = document.getElementById('logoutBtn');
 authTabs.forEach(tab => {
     tab.addEventListener('click', () => {
         const tabName = tab.getAttribute('data-tab');
@@ -41,27 +32,15 @@ authTabs.forEach(tab => {
         window.history.replaceState({}, '', `${window.location.pathname}?tab=${tabName}`);
     });
 });
+document.querySelectorAll('.form-footer .auth-tab').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        switchTab('login');
+        window.history.replaceState({}, '', `${window.location.pathname}?tab=login`);
+    });
+});
 
-function showError(input, message) {
-    const formGroup = input.parentElement;
-    const errorMessage = formGroup.querySelector('.error-message');
-    input.classList.add('error');
-    errorMessage.innerText = message;
-    errorMessage.style.display = 'block';
-}
-
-function hideError(input) {
-    const formGroup = input.parentElement;
-    const errorMessage = formGroup.querySelector('.error-message');
-    input.classList.remove('error');
-    errorMessage.style.display = 'none';
-}
-
-function isValidEmail(email) {
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
-}
-
+// Hiện/ẩn mật khẩu
 document.querySelectorAll('.password-toggle').forEach(toggle => {
     toggle.addEventListener('click', function() {
         const targetId = this.getAttribute('data-target');
@@ -79,103 +58,102 @@ document.querySelectorAll('.password-toggle').forEach(toggle => {
     });
 });
 
-const isLoggedIn = localStorage.getItem('isLoggedIn');
-const userProfile = document.getElementById('userProfile');
-const guestActions = document.getElementById('guestActions');
-const logoutBtn = document.getElementById('logoutBtn');
+// Hiển thị/ẩn lỗi
+function showError(input, message) {
+    const errorDiv = input.parentElement.querySelector('.error-message');
+    input.classList.add('error');
+    errorDiv.textContent = message;
+    errorDiv.style.display = 'block';
+}
+function hideError(input) {
+    const errorDiv = input.parentElement.querySelector('.error-message');
+    input.classList.remove('error');
+    errorDiv.textContent = '';
+    errorDiv.style.display = 'none';
+}
+document.querySelectorAll('input').forEach(input => {
+    input.addEventListener('input', () => hideError(input));
+});
+function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+// Đăng nhập
 loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    let isValid = true;
+
     const email = document.getElementById('loginEmail');
     const password = document.getElementById('loginPassword');
-    hideError(email);
-    hideError(password);
+    let valid = true;
+    hideError(email); hideError(password);
 
     if (!email.value.trim()) {
         showError(email, 'Email không được để trống');
-        isValid = false;
+        valid = false;
     } else if (!isValidEmail(email.value.trim())) {
         showError(email, 'Email không hợp lệ');
-        isValid = false;
+        valid = false;
     }
     if (!password.value.trim()) {
         showError(password, 'Mật khẩu không được để trống');
-        isValid = false;
+        valid = false;
     }
-    if (isValid) {
-        const submitBtn = loginForm.querySelector('.btn');
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang xử lý...';
-        submitBtn.disabled = true;
-        setTimeout(() => {
-            localStorage.setItem('isLoggedIn', 'true');
-            localStorage.setItem('userEmail', email.value.trim());
-            submitBtn.innerHTML = '<i class="fas fa-check"></i> Thành công!';
-            submitBtn.style.background = 'linear-gradient(90deg, #4caf50, #2e7d32)';
-            setTimeout(() => {
-                alert('Đăng nhập thành công!');
-                window.location.href = 'index.html';
-            }, 1000);
-        }, 1500);
-    }
+    if (!valid) return;
+
+    localStorage.setItem('isLoggedIn', 'true');
+    localStorage.setItem('userEmail', email.value.trim());
+    localStorage.setItem('userName', email.value.trim().split('@')[0]); // Nếu chưa đăng ký, lấy phần trước @ làm tên
+    alert('Đăng nhập thành công!');
+    window.location.href = 'index.html';
 });
 
-// Fixed register form event listener
+// Đăng ký
 registerForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    let isValid = true;
+    const name = document.getElementById('registerName');
     const email = document.getElementById('registerEmail');
     const password = document.getElementById('registerPassword');
     const confirmPassword = document.getElementById('registerConfirmPassword');
-    
-    hideError(email);
-    hideError(password);
-    hideError(confirmPassword);
+    let valid = true;
+    hideError(name); hideError(email); hideError(password); hideError(confirmPassword);
 
+    if (!name.value.trim()) {
+        showError(name, 'Họ tên không được để trống');
+        valid = false;
+    }
     if (!email.value.trim()) {
         showError(email, 'Email không được để trống');
-        isValid = false;
+        valid = false;
     } else if (!isValidEmail(email.value.trim())) {
         showError(email, 'Email không hợp lệ');
-        isValid = false;
+        valid = false;
     }
-    
+
     if (!password.value.trim()) {
         showError(password, 'Mật khẩu không được để trống');
-        isValid = false;
+        valid = false;
     } else if (password.value.length < 6) {
         showError(password, 'Mật khẩu phải có ít nhất 6 ký tự');
-        isValid = false;
+        valid = false;
     }
     
     if (!confirmPassword.value.trim()) {
         showError(confirmPassword, 'Xác nhận mật khẩu không được để trống');
-        isValid = false;
+        valid = false;
     } else if (password.value !== confirmPassword.value) {
         showError(confirmPassword, 'Mật khẩu xác nhận không khớp');
-        isValid = false;
+        valid = false;
     }
-    
-    if (isValid) {
-        const submitBtn = registerForm.querySelector('.btn');
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang xử lý...';
-        submitBtn.disabled = true;
-        setTimeout(() => {
-            // Lưu thông tin đăng ký (trong thực tế sẽ gửi đến server)
-            submitBtn.innerHTML = '<i class="fas fa-check"></i> Thành công!';
-            submitBtn.style.background = 'linear-gradient(90deg, #4caf50, #2e7d32)';
-            setTimeout(() => {
-                alert('Đăng ký thành công! Vui lòng đăng nhập.');
-                switchTab('login');
-                window.history.replaceState({}, '', `${window.location.pathname}?tab=login`);
-                // Reset form
-                registerForm.reset();
-                // Reset button state
-                setTimeout(() => {
-                    submitBtn.innerHTML = 'Đăng ký';
-                    submitBtn.disabled = false;
-                    submitBtn.style.background = '';
-                }, 1000);
-            }, 1000);
-        }, 1500);
-    }
+    if (!valid) return;
+
+    localStorage.setItem('isLoggedIn', 'true');
+    localStorage.setItem('userEmail', email.value.trim());
+    localStorage.setItem('userName', name.value.trim());
+    alert('Đăng ký thành công!');
+    window.location.href = 'index.html';
+});
+
+// Thiết lập tab active khi tải trang
+document.addEventListener('DOMContentLoaded', function() {
+    switchTab(activeTab);
 });
