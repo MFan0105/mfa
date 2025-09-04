@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StyleSense - Gợi ý phong cách ăn mặc</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="preloader">
+        <div class="preloader-content">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Đang tải StyleSense...</p>
+        </div>
+    </div>
+
+    <div class="banner">
+        <div class="navbar">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-tshirt"></i>
+                </div>
+                <span>StyleSense</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#"><i class="fas fa-home"></i> Trang chủ</a></li>
+                <li><a href="#"><i class="fas fa-tshirt"></i> Phong cách</a></li>
+                <li><a href="#"><i class="fas fa-star"></i> Gợi ý</a></li>
+                <li><a href="#"><i class="fas fa-user"></i> Cá nhân hóa</a></li>
+                
+                <div class="user-actions" id="guestActions">
+                    <a href="auth.html?tab=login" class="user-btn">Đăng nhập</a>
+                    <a href="auth.html?tab=register" class="user-btn">Đăng ký</a>
+                </div>
+                
+                <div class="user-profile" id="userProfile" style="display: none;">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=464&q=80" alt="User Avatar" class="user-avatar" loading="lazy">
+                    <span>Nguyễn Văn A</span>
+                    <div class="user-dropdown">
+                        <a href="#"><i class="fas fa-user"></i> Hồ sơ</a>
+                        <a href="#"><i class="fas fa-heart"></i> Yêu thích</a>
+                        <a href="#"><i class="fas fa-cog"></i> Cài đặt</a>
+                        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+                    </div>
+                </div>
+            </ul>
+        </div>
+        <div class="content">
+            <h1>Khám phá phong cách của bạn</h1>
+            <p>StyleSense giúp bạn tìm ra phong cách ăn mặc phù hợp với cá tính, dáng người và hoàn cảnh. Tạo nên phong cách riêng biệt và tự tin trong mọi tình huống.</p>
+            <div class="button-group">
+                <button class="btn btn-primary"><i class="fas fa-magic"></i> Khám phá ngay</button>
+                <button class="btn btn-secondary"><i class="fas fa-user"></i> Tư vấn cá nhân</button>
+            </div>
+        </div>
+    </div>
+
+    <section class="style-categories">
+        <h2 class="section-title">Phong cách nổi bật</h2>
+        <div class="categories-grid">
+            <div class="category-card">
+                <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Phong cách công sở" class="category-img" loading="lazy">
+                <div class="category-content">
+                    <h3>Công sở</h3>
+                    <p>Lịch sự, chuyên nghiệp nhưng vẫn thời trang</p>
+                </div>
+            </div>
+            <div class="category-card">
+                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=772&q=80" alt="Phong cách dạo phố" class="category-img" loading="lazy">
+                <div class="category-content">
+                    <h3>Dạo phố</h3>
+                    <p>Thoải mái, trẻ trung và cực kỳ hợp thời</p>
+                </div>
+            </div>
+            <div class="category-card">
+                <img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Phong cách dự tiệc" class="category-img" loading="lazy">
+                <div class="category-content">
+                    <h3>Dự tiệc</h3>
+                    <p>Lộng lẫy, sang trọng và đẳng cấp</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <h2 class="section-title">Tại sao chọn StyleSense?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-user-check"></i>
+                </div>
+                <h3>Cá nhân hóa</h3>
+                <p>Gợi ý phong cách dựa trên hình thể, sở thích và tính cách riêng của bạn</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <h3>Theo mùa và xu hướng</h3>
+                <p>Cập nhật những xu hướng thời trang mới nhất phù hợp với từng mùa</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-piggy-bank"></i>
+                </div>
+                <h3>Tiết kiệm ngân sách</h3>
+                <p>Gợi ý những items phù hợp với túi tiền và dễ phối đồ</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <h2 class="section-title">Cảm nhận của người dùng</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Nhờ StyleSense, mình đã tìm được phong cách phù hợp và tự tin hơn rất nhiều trong cách ăn mặc hàng ngày."</p>
+                <div class="testimonial-author">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=776&q=80" alt="Mai Linh" class="author-avatar" loading="lazy">
+                    <div class="author-info">
+                        <h4>Mai Linh</h4>
+                        <p>Nhân viên văn phòng</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Tôi rất hài lòng với những gợi ý phối đồ của StyleSense. Giờ đây tôi không còn mất nhiều thời gian chọn trang phục mỗi sáng."</p>
+                <div class="testimonial-author">
+                    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Trung Anh" class="author-avatar" loading="lazy">
+                    <div class="author-info">
+                        <h4>Trung Anh</h4>
+                        <p>Giám đốc kinh doanh</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Là sinh viên, tôi luôn muốn mặc đẹp nhưng ngân sách có hạn. StyleSense đã giúp tôi chọn được những items giá rẻ nhưng vẫn thời trang."</p>
+                <div class="testimonial-author">
+                    <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=798&q=80" alt="Minh Tuấn" class="author-avatar" loading="lazy">
+                    <div class="author-info">
+                        <h4>Minh Tuấn</h4>
+                        <p>Sinh viên</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">StyleSense</div>
+            <p>Nền tảng gợi ý phong cách ăn mặc phù hợp với mọi người</p>
+            <ul class="footer-links">
+                <li><a href="#">Về chúng tôi</a></li>
+                <li><a href="#">Dịch vụ</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Liên hệ</a></li>
+                <li><a href="#">Hỏi đáp</a></li>
+            </ul>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+            </div>
+            <div class="copyright">
+                &copy; 2023 StyleSense. Tất cả quyền được bảo lưu.
+            </div>
+        </div>
+    </footer>
+    
+    <a href="#" id="scrollToTopBtn" title="Cuộn lên đầu trang">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+    
+    <script src="script.js"></script>
+</body>
+</html>
