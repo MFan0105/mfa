@@ -44,21 +44,21 @@ logoutBtn.addEventListener('click', (e) => {
     e.preventDefault();
     // Giả lập đăng xuất: xóa trạng thái đăng nhập trong localStorage
     localStorage.removeItem('isLoggedIn');
-    
+    localStorage.removeItem('userName');
     guestActions.style.display = 'flex';
     userProfile.style.display = 'none';
     alert('Đã đăng xuất!');
 });
 
 // Kiểm tra trạng thái đăng nhập (giả lập)
-// Trong thực tế, bạn sẽ kiểm tra cookie hoặc localStorage
 const isLoggedIn = localStorage.getItem('isLoggedIn');
 if (isLoggedIn === 'true') {
     guestActions.style.display = 'none';
     userProfile.style.display = 'flex';
+    // Hiển thị tên người dùng nếu có
+    const userNameSpan = document.getElementById('userNameDisplay');
+    const userName = localStorage.getItem('userName');
+    if (userNameSpan && userName) {
+        userNameSpan.textContent = userName;
+    }
 }
-
-// Giả lập logic đăng nhập để kiểm tra
-// Để đăng nhập, bạn có thể mở Console trong trình duyệt (F12) và gõ:
-// localStorage.setItem('isLoggedIn', 'true');
-// Sau đó tải lại trang.

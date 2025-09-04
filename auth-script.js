@@ -41,7 +41,9 @@ authTabs.forEach(tab => {
 // Xử lý logic đăng nhập
 loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
+    const username = document.getElementById('loginUsername').value;
     localStorage.setItem('isLoggedIn', 'true');
+    localStorage.setItem('userName', username);
     alert('Đăng nhập thành công!');
     window.location.href = 'index.html';
 });
@@ -49,15 +51,16 @@ loginForm.addEventListener('submit', (e) => {
 // Xử lý logic đăng ký
 registerForm.addEventListener('submit', (e) => {
     e.preventDefault();
+    const name = document.getElementById('registerName').value;
     const password = document.getElementById('registerPassword').value;
     const confirmPassword = document.getElementById('registerConfirmPassword').value;
     
     if (password !== confirmPassword) {
-        alert('Mật khẩu xác nhận không khớp!');
+        alert('Mật khẩu nhập lại không khớp!');
         return;
     }
-    
     localStorage.setItem('isLoggedIn', 'true');
+    localStorage.setItem('userName', name);
     alert('Đăng ký thành công!');
     window.location.href = 'index.html';
 });

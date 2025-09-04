@@ -28,29 +28,27 @@
                 <li><a href="#"><i class="fas fa-chart-pie"></i> Tổng quan</a></li>
                 <li><a href="#"><i class="fas fa-money-bill-wave"></i> Thu chi</a></li>
                 <li><a href="#"><i class="fas fa-piggy-bank"></i> Tiết kiệm</a></li>
-                
-                <div class="user-actions" id="guestActions">
-                    <a href="auth.html?tab=login" class="user-btn">Đăng nhập</a>
-                    <a href="auth.html?tab=register" class="user-btn">Đăng ký</a>
-                </div>
-                
-                <div class="user-profile" id="userProfile" style="display: none;">
-                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=464&q=80" alt="User Avatar" class="user-avatar" loading="lazy">
-                    <span>Nguyễn Văn A</span>
-                    <div class="user-dropdown">
-                        <a href="#"><i class="fas fa-user"></i> Hồ sơ</a>
-                        <a href="#"><i class="fas fa-cog"></i> Cài đặt</a>
-                        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
-                    </div>
-                </div>
             </ul>
+            <div class="user-actions" id="guestActions">
+                <a href="auth.html?tab=login" class="user-btn">Đăng nhập</a>
+                <a href="auth.html?tab=register" class="user-btn">Đăng ký</a>
+            </div>
+            <div class="user-profile" id="userProfile" style="display: none;">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=464&q=80" alt="User Avatar" class="user-avatar" loading="lazy">
+                <span id="userNameDisplay">Nguyễn Văn A</span>
+                <div class="user-dropdown">
+                    <a href="#"><i class="fas fa-user"></i> Hồ sơ</a>
+                    <a href="#"><i class="fas fa-cog"></i> Cài đặt</a>
+                    <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+                </div>
+            </div>
         </div>
         <div class="content">
             <h1>Quản lý tài chính thông minh</h1>
             <p>WealthWallet giúp bạn theo dõi thu chi, lập kế hoạch tiết kiệm và đạt được mục tiêu tài chính cá nhân. Kiểm soát tài chính, làm chủ tương lai.</p>
             <div class="button-group">
-                <button class="btn btn-primary"><i class="fas fa-chart-line"></i> Bắt đầu ngay</button>
-                <button class="btn btn-secondary"><i class="fas fa-book"></i> Tìm hiểu thêm</button>
+                <a href="auth.html?tab=register" class="btn btn-primary"><i class="fas fa-chart-line"></i> Bắt đầu ngay</a>
+                <a href="#features" class="btn btn-secondary"><i class="fas fa-book"></i> Tìm hiểu thêm</a>
             </div>
         </div>
     </div>
@@ -173,5 +171,15 @@
     </a>
     
     <script src="script.js"></script>
+    <script>
+    // Hiển thị tên người dùng đăng nhập
+    document.addEventListener('DOMContentLoaded', function() {
+        const userNameSpan = document.getElementById('userNameDisplay');
+        const userName = localStorage.getItem('userName');
+        if (userNameSpan && userName) {
+            userNameSpan.textContent = userName;
+        }
+    });
+    </script>
 </body>
 </html>
